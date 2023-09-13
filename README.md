@@ -244,8 +244,24 @@ const increase = () => {
 
 ### go to the product page and provide the filter and sort component
 
+### product page
+
+- filter, sort, productlist componenet
+- inside productlist - setup the gridview,listview
+
 ### get the filtered_product list from the filtercontext in the productList componenet
 
 ### productList page
 
 - setup the gridview,listview
+
+### sort page
+
+- in sort page add the sort icon for grid_view true/false as it gives the list/gridview from the product list componenets
+- also the icon changes according to the boolean value of gridview in the filtercontext
+- setup the sort-filter inside the form
+
+### set the click buttons in sortpage componenet
+
+- in sort componenet we invoke the onclicklfn for the sort btn of list and grid view
+- if we wnat to hold a value we need to pass the function inside the function in onclick which will invoke only after click render and
