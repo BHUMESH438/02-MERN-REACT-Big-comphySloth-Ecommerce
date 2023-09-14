@@ -265,3 +265,69 @@ const increase = () => {
 
 - in sort componenet we invoke the onclicklfn for the sort btn of list and grid view
 - if we wnat to hold a value we need to pass the function inside the function in onclick which will invoke only after click render and
+- setup the toggle for grid and list view
+
+### sort controlled input- sort,localecompare
+
+- get the value from the select option to sort in the context
+- for sorting numbers use array.sort((a-b)=>a-b)
+- for soerting the letters in array use array.sort((a-b)=>a.localecompare(b,'en',{sensitivity:base}))
+
+# filters
+
+### 1. default values
+
+-Math.max(), map
+
+- while updating the object destrucutre it by ... as the previous value will be erased and also update it by re-assigning the values
+
+```js
+ filters: {
+        ...state.filters,
+        max_price: maxPrice,
+        price: maxPrice
+      }
+```
+
+### 2. filter-text-search-dynamic input
+
+- get the filter state value,updatefilter,clearfilter function - usefitlercontext()
+
+- inorder to set a contrilled input we need a value and onChange
+- set the value dynamically in the reducer action by [name]:value
+- see the jsnuggets dynamic property value
+  -getUnique value -utils
+
+```js
+export const getUniqueValues = (data, type) => {
+  let uniqueItem = data.map(item => {
+    return item[type];
+  });
+  if (type === 'colors') {
+    uniqueItem = uniqueItem.flat();
+  }
+  return ['all', ...new Set(uniqueItem)];
+};
+```
+
+why should we shoiuld give new near the set
+flat will help to remove nested array and how it deep it is
+
+```js
+1;
+const newArray = originalArray.flat([depth]);
+2;
+const nestedArray = [1, 2, [3, 4, [5, 6]]];
+const flatArray = nestedArray.flat(2); // Flatten two levels deep
+
+console.log(flatArray); // Output: [1, 2, 3, 4, 5, 6]
+3;
+const nestedArray = [1, 2, [3, 4, [5, 6]]];
+const flatArray = nestedArray.flat(); // Defaults to depth 1
+
+console.log(flatArray); // Output: [1, 2, 3, 4, [5, 6]]
+```
+
+### catogery filter
+
+-map the catogery filter

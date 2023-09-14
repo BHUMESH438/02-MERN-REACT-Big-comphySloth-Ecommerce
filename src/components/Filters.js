@@ -1,12 +1,49 @@
-import React from 'react'
-import styled from 'styled-components'
-import { useFilterContext } from '../context/filter_context'
-import { getUniqueValues, formatPrice } from '../utils/helpers'
-import { FaCheck } from 'react-icons/fa'
+import React from 'react';
+import styled from 'styled-components';
+import { useFilterContext } from '../context/filter_context';
+import { getUniqueValues, formatPrice } from '../utils/helpers';
+import { FaCheck } from 'react-icons/fa';
 
 const Filters = () => {
-  return <h4>filters</h4>
-}
+  const {
+    filters: { text, company, color, min_price, max_price, price, shipping, category },
+    updateFilters,
+    all_products,
+    clearFilters
+  } = useFilterContext();
+
+  const categories = getUniqueValues(all_products, 'category');
+  const companies = getUniqueValues(all_products, 'company');
+  const colors = getUniqueValues(all_products, 'colors');
+
+  return (
+    <Wrapper>
+      <div className='content'>
+        {/* controlled inputs */}
+        <form onSubmit={e => e.preventDefault()}>
+          {/* search input */}
+          <div className='form-control'>
+            <input type='text' name='text' placeholder='search' className='search-input' value={text} onChange={updateFilters} />
+          </div>
+          {/* catogaries */}
+          <div className='form-control'>
+            <h5>catogaries</h5>
+            <div>
+              {categories.map((c, index) => {
+                return (
+                  <button key={index} name='category' type='button' onClick={updateFilters} className={`${category === c.toLowerCase() ? 'active' : null}`}>
+                    {c}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+          {/* end search input */}
+        </form>
+      </div>
+    </Wrapper>
+  );
+};
 
 const Wrapper = styled.section`
   .form-control {
@@ -106,6 +143,6 @@ const Wrapper = styled.section`
       top: 1rem;
     }
   }
-`
+`;
 
-export default Filters
+export default Filters;
