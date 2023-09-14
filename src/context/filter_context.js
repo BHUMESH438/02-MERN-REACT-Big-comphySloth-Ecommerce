@@ -61,6 +61,9 @@ export const FilterProvider = ({ children }) => {
     if (name === 'category') {
       value = e.target.textContent; //to access the mapped string value
     }
+    if (name === 'color') {
+      value = e.target.dataset.color;
+    }
     dispatch({ type: UPDATE_FILTERS, payload: { name, value } });
   };
 

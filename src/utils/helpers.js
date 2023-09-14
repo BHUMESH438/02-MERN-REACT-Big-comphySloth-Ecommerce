@@ -10,7 +10,7 @@ export const getUniqueValues = (data, type) => {
     return item[type];
   });
   if (type === 'colors') {
-    uniqueItem = uniqueItem.flat();
+    uniqueItem = uniqueItem.flat(); //flat nested array
   }
   return ['all', ...new Set(uniqueItem)];
 };

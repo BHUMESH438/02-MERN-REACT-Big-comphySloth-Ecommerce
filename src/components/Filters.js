@@ -16,6 +16,8 @@ const Filters = () => {
   const companies = getUniqueValues(all_products, 'company');
   const colors = getUniqueValues(all_products, 'colors');
 
+  console.log(companies);
+
   return (
     <Wrapper>
       <div className='content'>
@@ -38,7 +40,51 @@ const Filters = () => {
               })}
             </div>
           </div>
+          {/* companies */}
+          <div className='form-control'>
+            <h5>company</h5>
+            <select name='company' value={company} onChange={updateFilters} className='company'>
+              {companies.map((c, index) => {
+                return (
+                  <option key={index} value={c}>
+                    {c}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
           {/* end search input */}
+          {/* colors */}
+          <div className='form-control'>
+            <h5>colors</h5>
+            <div className='colors'>
+              {colors.map((c, i) => {
+                if (c === 'all') {
+                  return (
+                    <button key={i} name='color' onClick={updateFilters} data-color='all' className={`${color === 'all' ? 'all-btn active' : 'all-btn'}`}>
+                      all
+                    </button>
+                  );
+                }
+                return (
+                  <button
+                    key={i}
+                    name='color'
+                    value={color}
+                    onClick={updateFilters}
+                    className={`${color === c ? 'color-btn active' : 'color-btn'}`}
+                    style={{
+                      background: c
+                    }}
+                    data-color={c}
+                  >
+                    {/* fachek will be default black and it is changed by inline css */}
+                    {color === c ? <FaCheck /> : null}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
         </form>
       </div>
     </Wrapper>

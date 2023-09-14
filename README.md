@@ -328,6 +328,22 @@ const flatArray = nestedArray.flat(); // Defaults to depth 1
 console.log(flatArray); // Output: [1, 2, 3, 4, [5, 6]]
 ```
 
-### catogery filter
+### catogery button filter & company select filter
 
--map the catogery filter
+- map the catogery filter
+- create a e.value.textConetnt to catch the value of the
+  mapped string inside the array.
+
+```js
+//filter property update dynamically(state.filter)----------------
+const updateFilters = e => {
+  let name = e.target.name;
+  let value = e.target.value;
+  if (name === 'category') {
+    value = e.target.textContent; //to access the mapped string value
+  }
+  dispatch({ type: UPDATE_FILTERS, payload: { name, value } });
+};
+```
+
+### color filter
