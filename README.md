@@ -347,3 +347,13 @@ const updateFilters = e => {
 ```
 
 ### color filter
+
+In the code you provided, the `data-color` attribute is being used to store additional data associated with each button element. When you want to extract this data in the `onClick` event handler (`updateFilters` in this case), you can access it using `e.target.dataset.color`. Here's why:
+
+1. **Data Attributes**: The `data-` attributes are a way to store custom data private to the page or application. In your case, `data-color` is used to store the color associated with each button.
+
+2. **`e.target`**: In an event handler function, `e` (or `event`) is an object that represents the event that occurred. `e.target` refers to the DOM element that triggered the event. In your case, it's the button element that was clicked.
+
+3. **`dataset` Property**: The `dataset` property of a DOM element allows you to access all the `data-` attributes associated with that element. It provides a convenient way to read and manipulate custom data attributes.
+
+By using `e.target.dataset.color`, you are accessing the `data-color` attribute of the clicked button element and extracting its value, which, in this case, is the color associated with that button. This is a common and recommended way to work with custom data attributes in JavaScript event handlers. It keeps your JavaScript code clean and separate from HTML, making it easier to maintain and understand.
