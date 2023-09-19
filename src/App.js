@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import { About, Auth, Cart, Error, Home, Checkout, PrivateRoute, Products, SingleProduct } from './pages';
 import Product from './components/Product';
 
+// domain     dev-mb40oudze6mddx0h.us.auth0.com
+// client id  bx5tjf3I7UBbtzXu5DZFPc0sb2IsSuR0
 function App() {
   return (
     <Router>

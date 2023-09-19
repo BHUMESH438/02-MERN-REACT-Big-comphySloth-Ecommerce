@@ -346,7 +346,7 @@ const updateFilters = e => {
 };
 ```
 
-### color filter
+### color filter - data-color for button
 
 In the code you provided, the `data-color` attribute is being used to store additional data associated with each button element. When you want to extract this data in the `onClick` event handler (`updateFilters` in this case), you can access it using `e.target.dataset.color`. Here's why:
 
@@ -357,3 +357,66 @@ In the code you provided, the `data-color` attribute is being used to store addi
 3. **`dataset` Property**: The `dataset` property of a DOM element allows you to access all the `data-` attributes associated with that element. It provides a convenient way to read and manipulate custom data attributes.
 
 By using `e.target.dataset.color`, you are accessing the `data-color` attribute of the clicked button element and extracting its value, which, in this case, is the color associated with that button. This is a common and recommended way to work with custom data attributes in JavaScript event handlers. It keeps your JavaScript code clean and separate from HTML, making it easier to maintain and understand.
+
+### range input - for price
+
+- change the input value to string - number by Number in update filter function
+- give the name and value from the input as key:value as it is the controlled input
+- update the input values from the inputs
+
+### checkbox also have a data attribute
+
+### clear filter button rewrite the obj property and no need to update the max,min price property at the begining and set the default value as the price(state.max.price)
+
+## until now we have set the client side state value changes whent the input is entered. i.e just set the values of the state when the input is adjusted
+
+## hereafter we are going to set the value of the all_product array that we used in the useeffect when the value changed
+
+# RULES for setting up the filter value
+
+## for filtering start with the 3 array of same vale, one for tempchanges and other for storing and updating that temp changes. and the final one is for reset of preserving the old value for reset/ref
+
+```js
+
+ if (action.type === LOAD_PRODUCTS) {
+    let maxPrice = action.payload.map(p => p.price);
+    maxPrice = Math.max(...maxPrice);
+    // we will set the price and maxprice at the max value.
+    return {
+      ...state,
+      all_products: [...action.payload], //in filtering always have 2[of same value]
+      filtered_products: [...action.payload],
+      filters: {
+        ...state.filters,
+        .
+        .
+        .
+        .
+        .
+ if (action.type === FILTER_PRODUCTS) {
+    const { all_products } = state;
+    const { text, category, company, color, price, shipping } = state.filters;
+    let tempProducts = [...all_products];
+    return { ...state, filtered_products: tempProducts };
+  }
+```
+
+- to find the value of array of array first filter that array and use the find in the return and see the param===arrayvalues and return the filter values in the reducer function .
+
+### Add to cart
+
+- pass the value from the amount in singleProduct page to cart
+
+### remove item from cart
+
+- for remove item filter we need to pass the id from the reducer function and we must get the id through payload and return it to the state
+- in js filter function we should keep which fitler is not matching
+- for clear cart give the empty array in return
+
+### increase/decrease toggle in cart
+
+- see the id matches and if it increse or decrease and store it in a temp value and return
+
+### calvulation
+
+- use reducer

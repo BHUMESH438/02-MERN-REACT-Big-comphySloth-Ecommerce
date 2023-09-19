@@ -8,6 +8,7 @@ import { useUserContext } from '../context/user_context';
 
 const CartButtons = () => {
   const { closeSidebar } = useProductsContext();
+  const { total_item } = useCartContext();
   return (
     // .cart-btn-wrapper is used in navbar to dispaly only after 992px and beyond it is hided
     <Wrapper className='cart-btn-wrapper'>
@@ -15,7 +16,7 @@ const CartButtons = () => {
         Cart
         <span className='cart-container'>
           <FaShoppingCart />
-          <span className='cart-value'>12</span>
+          <span className='cart-value'>{total_item}</span>
         </span>
       </Link>
       <button type='button' className='auth-btn'>

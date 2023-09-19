@@ -9,6 +9,7 @@ export const getUniqueValues = (data, type) => {
   let uniqueItem = data.map(item => {
     return item[type];
   });
+
   if (type === 'colors') {
     uniqueItem = uniqueItem.flat(); //flat nested array
   }
