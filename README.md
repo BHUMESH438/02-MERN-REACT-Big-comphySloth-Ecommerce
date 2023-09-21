@@ -420,3 +420,94 @@ By using `e.target.dataset.color`, you are accessing the `data-color` attribute 
 ### calvulation
 
 - use reducer
+
+### auth 0
+
+- login,spa,react, copy the local host url fill above 3 blanks in cors url
+- in database signin
+- add extras login other that oauth/social login
+- wrap around provider and app
+
+```js index
+root.render(
+  <Auth0Provider
+    domain='dev-mb40oudze6mddx0h.us.auth0.com'
+    clientId='bx5tjf3I7UBbtzXu5DZFPc0sb2IsSuR0'
+    authorizationParams={{
+      redirect_uri: window.location.origin
+    }}
+  >
+    <UserProvider>
+      <ProductsProvider>
+        <FilterProvider>
+          <CartProvider>
+            <App />
+```
+
+- wrap useprovider as the first wrapper and invoke oauth()
+
+```js
+ const { isAuthenticated, loginWithRedirect, logout, user, isLoading } = useAuth0();
+
+  const [myUser, setMyUser] = useState(null);
+
+  useEffect(() => {
+    console.log(isAuthenticated, isLoading.user);
+  }, [isAuthenticated]);
+
+  return <UserContext.Provider value={{ loginWithRedirect, logout }}>{children}</UserContext.Provider>;
+};
+
+```
+
+### autho private route over chekout, as checkout route is seperate and not the children
+
+### when checkout function mount we post the data from the checkout functio to the netlify serverless function.
+
+from chechkout we pass the stringify state values to the netlify function and parse that value and pass that value to the body of that netlify serverless fuction so that it will send the response with the cart items detials
+
+### always for sending the data use json.stringify()
+
+### always for receiving the data use json.parse()
+
+### in node js / serverless fn to access the env values we need dotenv package and react we use import/export
+
+### STRPE CHECKOUT - create-payment-intent fn
+
+- in serverless arcttecture exports. module provided by the js for the export
+
+- This approach is often used in serverless applications (like AWS Lambda) where the platform expects a specific function (in this case, handler) to be present in the exported object. The platform will then invoke this function when the associated event (e.g., an HTTP request) occurs
+
+- get client secret from dotenv and pass it to stripe
+
+```js
+require('dotenv').config();
+const stripe = require('stripe')(process.env.REACT_APP_STRIPE_SECRET_KEY);
+```
+
+```js
+{
+  failed && (
+    <h4>
+      Payment failed. Redirecting to home page in <span id='countdown'>20</span> sec and cart will be cleared automatically...
+    </h4>
+  );
+}
+{
+  failed &&
+    (() => {
+      let seconds = 20;
+
+      const countdownInterval = setInterval(() => {
+        seconds--;
+        document.getElementById('countdown').innerText = seconds;
+
+        if (seconds === 0) {
+          clearInterval(countdownInterval);
+          clearCart();
+          navigate('/');
+        }
+      }, 1000);
+    })();
+}
+```

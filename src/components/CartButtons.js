@@ -8,7 +8,8 @@ import { useUserContext } from '../context/user_context';
 
 const CartButtons = () => {
   const { closeSidebar } = useProductsContext();
-  const { total_item } = useCartContext();
+  const { total_item, clearCart } = useCartContext();
+  const { loginWithRedirect, logout, myUser } = useUserContext();
   return (
     // .cart-btn-wrapper is used in navbar to dispaly only after 992px and beyond it is hided
     <Wrapper className='cart-btn-wrapper'>
@@ -19,9 +20,23 @@ const CartButtons = () => {
           <span className='cart-value'>{total_item}</span>
         </span>
       </Link>
-      <button type='button' className='auth-btn'>
-        Logon <FaUserPlus />
-      </button>
+
+      {myUser ? (
+        <button
+          type='button'
+          className='auth-btn'
+          onClick={() => {
+            clearCart(); //checkout cart should be empty
+            logout({ returnTo: window.location.origin });
+          }}
+        >
+          Logout <FaUserMinus />
+        </button>
+      ) : (
+        <button type='button' className='auth-btn' onClick={loginWithRedirect}>
+          Login <FaUserPlus />
+        </button>
+      )}
     </Wrapper>
   );
 };

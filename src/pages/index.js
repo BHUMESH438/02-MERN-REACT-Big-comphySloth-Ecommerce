@@ -7,3 +7,4 @@ export { default as Checkout } from './CheckoutPage';
 export { default as PrivateRoute } from './PrivateRoute';
 export { default as Products } from './ProductsPage';
 export { default as SingleProduct } from './SingleProductPage';
+export { default as AuthWrapper } from './AuthWrapper';

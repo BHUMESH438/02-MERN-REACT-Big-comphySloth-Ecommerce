@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useParams, useNavigate, redirect } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useProductsContext } from '../context/products_context';
 import { single_product_url as url } from '../utils/constants';
 import { formatPrice } from '../utils/helpers';
@@ -19,10 +19,12 @@ const SingleProductPage = () => {
         navigate('/');
       }, 3000);
     }
+    //eslint-disable-next-line
   }, [error]);
 
   useEffect(() => {
     fetchSingleProduct(`${url}${id}`);
+    //eslint-disable-next-line
   }, [id]);
 
   if (loading) {
